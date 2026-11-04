@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: demo
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://192.168.100.128:3306/user
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: Root@123456
+  servlet:
+    multipart:
+      max-file-size: 8MB
+      max-request-size: 8MB
+mybatis:
+  configuration:
+   map-underscore-to-camel-case: true
+   log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:Mapper/*.xml #Mapper文件位置
+
+server:
+  port: 8080
+
+jwt:
+  secret: SUxPVkVZT1XmiJHnmoTnmb3mnIjlhYk= #JWT密钥
+  expire: 1800000 #JWT过期时间
+
+aliyun:
+  MAX_SIZE: 8388608
+  ENDPOINT: "https://oss-cn-beijing.aliyuncs.com"
+  BUCKET_NAME: "wei-p"
+  REGION: "cn-beijing"
