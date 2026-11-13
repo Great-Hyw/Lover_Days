@@ -1,6 +1,7 @@
 package com.wei.UTIL;
 
 import com.wei.pojo.TurnstileResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -12,13 +13,13 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
-
+@Slf4j
 @Component
 public class Rootbits {
     @Value("${Cf.SITEVERIFY_URL}")
     private  String SITEVERIFY_URL;
     @Value("${Cf.siteKey}")
-    private  String secretKey = "0x4AAAAAAF81XyJAW_hAIIBIEe8RWVEmgAE";
+    private  String secretKey ;
     private static final RestTemplate restTemplate = new RestTemplate();
 
     public TurnstileResponse validateToken(String token, String remoteip) {
@@ -38,6 +39,7 @@ public class Rootbits {
             ResponseEntity<TurnstileResponse> response = restTemplate.postForEntity(SITEVERIFY_URL, request, TurnstileResponse.class);
             return response.getBody();
         } catch (Exception e) {
+            log.error( e.toString());
             TurnstileResponse errorResponse = new TurnstileResponse();
             errorResponse.setSuccess(false);
             errorResponse.setErrorCodes(List.of("internal-error"));
