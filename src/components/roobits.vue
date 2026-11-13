@@ -6,7 +6,10 @@ import { removeCookie, setCookie } from '../utils/cookie';
    const handleSuccess = async (token: string) => {
     console.log('Turnstile token:', token)
     const response= await postRoobits(token);
-    setCookie("rtoken",token,'ok',Date.now()+30*60*1000)
+    setCookie("rtoken",'ok',Date.now()+30*60*1000)
+
+
+
     
 
   }
