@@ -6,13 +6,13 @@ import { removeCookie, setCookie } from '../utils/cookie';
    const handleSuccess = async (token: string) => {
     console.log('Turnstile token:', token)
     const response= await postRoobits(token);
-    setCookie(rtoken,token,'ok',Date.now()+30*60*1000)
+    setCookie("rtoken",token,'ok',Date.now()+30*60*1000)
     
 
   }
   const handleError=(errors?:string)=>{
         console.log(errors)
-        removeCookie(rtoken)
+        removeCookie("rtoken")
   }
   const habdleExpired=()=>{
   
