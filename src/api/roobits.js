@@ -6,7 +6,7 @@ export function postRoobits(token){
     url: '/welcome',
     method: 'post',
     data:{
-        rtoken:token
+        token:token
     }
   })
 }
