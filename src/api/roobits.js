@@ -3,7 +3,7 @@ import request from './request'
 
 export function postRoobits(token){
      return request({
-    url: '/auth/welcome',
+    url: '/welcome',
     method: 'post',
     data:{
         rtoken:token
