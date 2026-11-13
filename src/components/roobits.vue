@@ -2,15 +2,19 @@
   import{postRoobits}from '@/api/roobits.js'
   import { VueTurnstile } from 'vue-cloudflare-turnstile'
 import { removeCookie, setCookie } from '../utils/cookie';
+import { useRouter} from 'vue-router'
+
+
+const router =useRouter();
 
    const handleSuccess = async (token: string) => {
     console.log('Turnstile token:', token)
     const response= await postRoobits(token);
+    if(response){
     setCookie("rtoken",'ok',Date.now()+30*60*1000)
+      router.push("/login")
+  }
 
-
-
-    
 
   }
   const handleError=(errors?:string)=>{
