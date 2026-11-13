@@ -17,14 +17,16 @@ public class Rootbits {
     private static final String secretKey = "0x4AAAAAAF81XyJAW_hAIIBIEe8RWVEmgAE";
     private static final RestTemplate restTemplate = new RestTemplate();
 
-    public static TurnstileResponse validateToken(String token) {
+    public static TurnstileResponse validateToken(String token, String remoteip) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("secret", secretKey);
         params.add("response", token);
-
+        if (remoteip != null) {
+            params.add("remoteip", remoteip);
+        }
 
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(params, headers);
 
@@ -40,4 +42,6 @@ public class Rootbits {
     }
 
 }
+
+
 

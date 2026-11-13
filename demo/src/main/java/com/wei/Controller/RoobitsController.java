@@ -17,9 +17,16 @@ public class RoobitsController {
     @PostMapping("/welcome")
     public result submitForm(@RequestParam("token") String token, HttpServletRequest request) {
 
+        String remoteip = request.getHeader("CF-Connecting-IP");
+        if (remoteip == null) {
+            remoteip = request.getHeader("X-Forwarded-For");
+        }
+        if (remoteip == null) {
+            remoteip = request.getRemoteAddr();
+        }
 
 
-        TurnstileResponse validation = Rootbits.validateToken(token);
+        TurnstileResponse validation = Rootbits.validateToken(token, remoteip);
 
         if (validation.isSuccess()) {
             // Valid token - process form
@@ -31,3 +38,4 @@ public class RoobitsController {
 
     }
 }
+
