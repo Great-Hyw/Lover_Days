@@ -29,3 +29,6 @@ aliyun:
   ENDPOINT: "https://oss-cn-beijing.aliyuncs.com"
   BUCKET_NAME: "wei-p"
   REGION: "cn-beijing"
+
+Cf:
+  siteKey :0x4AAAAAAF81XyJAW_hAIIBIEe8RWVEmgAE

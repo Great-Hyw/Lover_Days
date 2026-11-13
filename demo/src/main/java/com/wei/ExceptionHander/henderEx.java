@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @Slf4j
-@RestControllerAdvice//捕获全局异常
+@RestControllerAdvice//捕获全局异常//作用到全局controller
 public class henderEx {
 
     @ExceptionHandler(Exception.class)

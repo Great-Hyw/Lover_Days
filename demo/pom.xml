@@ -20,7 +20,24 @@
         <java.version>21</java.version>
     </properties>
 
+
+    <dependencyManagement>
+        <dependencies  >
+          <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+           <version>4.5.13</version>
+         </dependency>
+
+        </dependencies>
+
+    </dependencyManagement>
+
+
+
     <dependencies>
+
+
         <!-- ✅ spring-boot-starter-web：自带webmvc + 内置Tomcat，打包进jar -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

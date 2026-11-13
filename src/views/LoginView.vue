@@ -5,6 +5,7 @@ import { useAuthStore } from '@/stores/auth'
 import { useAnniversaryStore } from '@/stores/anniversary'
 import { showToast } from '@/utils/toast'
 import { launchPortal } from '@/utils/login-portal'
+import roobits from '@/components/roobits.vue'
 
 const router = useRouter()
 const route = useRoute()
@@ -41,6 +42,12 @@ const hearts = Array.from({ length: 14 }, (_, i) => ({
   drift: rand(-50, 50),
   emoji: HEART_EMOJIS[Math.floor(rand(0, HEART_EMOJIS.length))]
 }))
+
+
+const habdle=(token)=>{
+  console.log(token);
+  
+}
 
 function switchMode(target) {
   mode.value = target
@@ -151,6 +158,7 @@ async function onSubmit() {
       </div>
 
       <div class="login-card">
+    
         <div class="tabs">
           <button
             type="button"
