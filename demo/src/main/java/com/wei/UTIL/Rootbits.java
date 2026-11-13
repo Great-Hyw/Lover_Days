@@ -1,23 +1,27 @@
 package com.wei.UTIL;
 
 import com.wei.pojo.TurnstileResponse;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-
+@Component
 public class Rootbits {
-    private static final String SITEVERIFY_URL = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
-    private static final String secretKey = "0x4AAAAAAF81XyJAW_hAIIBIEe8RWVEmgAE";
+    @Value("${Cf.SITEVERIFY_URL}")
+    private  String SITEVERIFY_URL;
+    @Value("${Cf.siteKey}")
+    private  String secretKey = "0x4AAAAAAF81XyJAW_hAIIBIEe8RWVEmgAE";
     private static final RestTemplate restTemplate = new RestTemplate();
 
-    public static TurnstileResponse validateToken(String token, String remoteip) {
+    public TurnstileResponse validateToken(String token, String remoteip) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 

@@ -31,4 +31,5 @@ aliyun:
   REGION: "cn-beijing"
 
 Cf:
-  siteKey :0x4AAAAAAF81XyJAW_hAIIBIEe8RWVEmgAE
+  siteKey: 0x4AAAAAAF_wo8I2klZfrB9Vx_Bqfuxtc0I
+  SITEVERIFY_URL: https://challenges.cloudflare.com/turnstile/v0/siteverify

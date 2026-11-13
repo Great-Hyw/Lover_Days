@@ -29,7 +29,7 @@ import { removeCookie, setCookie } from '../utils/cookie';
 
 <template>
   <VueTurnstile
-    site-key="0x4AAAAAAF81X92mQki1q0bn"
+    site-key="0x4AAAAAAF_wo0GaYIus4lb-"
     @success="handleSuccess",
     @error="handleError"
     @expired="habdleExpired"
