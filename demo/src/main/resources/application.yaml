@@ -3,10 +3,10 @@ spring:
     name: demo
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://192.168.100.128:3306/user
+    url: jdbc:mysql://47.99.240.76:3306/user
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: Root@123456
+    username: photo
+    password: Photo@123456
   servlet:
     multipart:
       max-file-size: 8MB

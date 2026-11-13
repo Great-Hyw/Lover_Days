@@ -23,6 +23,6 @@ public class WebCongin implements WebMvcConfigurer {
 
         registry.addInterceptor(loginInterceptor)//添加拦截器
                 .addPathPatterns("/**")//拦截所有
-                .excludePathPatterns("/auth/login","/auth/register");//登录接口不拦截
+                .excludePathPatterns("/auth/login","/auth/register","/welcome");//登录接口不拦截
     }
 }
