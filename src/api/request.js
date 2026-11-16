@@ -17,7 +17,7 @@ const useMock = import.meta.env.VITE_USE_MOCK === 'true'
 const realAdapter = axios.getAdapter(['xhr', 'http', 'fetch'])
 
 const service = axios.create({
-  baseURL: 'https://api.brith.cc.cd:8443/api',
+  baseURL: 'https://cp.ywip.top:8443/api',
   timeout: 10000,
   adapter: (config) => {
     const isAuthRequest = /^\/auth\//.test(config.url || '')
