@@ -35,7 +35,7 @@ const router =useRouter();
 
 <template>
   <VueTurnstile
-    site-key="0x4AAAAAAF_wo0GaYIus4lb-"
+    site-key="0x4AAAAAAGDZF-Gcr5tEQO2n"
     @success="handleSuccess",
     @error="handleError"
     @expired="habdleExpired"

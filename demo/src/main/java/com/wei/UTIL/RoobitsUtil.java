@@ -15,7 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 @Slf4j
 @Component
-public class Rootbits {
+public class RoobitsUtil {
     @Value("${Cf.SITEVERIFY_URL}")
     private  String SITEVERIFY_URL;
     @Value("${Cf.siteKey}")
@@ -24,6 +24,7 @@ public class Rootbits {
 
     public TurnstileResponse validateToken(String token, String remoteip) {
         HttpHeaders headers = new HttpHeaders();
+        ResponseEntity<TurnstileResponse> response = null;
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
@@ -36,14 +37,12 @@ public class Rootbits {
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(params, headers);
 
         try {
-            ResponseEntity<TurnstileResponse> response = restTemplate.postForEntity(SITEVERIFY_URL, request, TurnstileResponse.class);
+             response = restTemplate.postForEntity(SITEVERIFY_URL, request, TurnstileResponse.class);
             return response.getBody();
         } catch (Exception e) {
-            log.error( e.toString());
-            TurnstileResponse errorResponse = new TurnstileResponse();
-            errorResponse.setSuccess(false);
-            errorResponse.setErrorCodes(List.of("internal-error"));
-            return errorResponse;
+            log.error(e.toString());
+
+            return response.getBody();
         }
     }
 

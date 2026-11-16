@@ -18,7 +18,7 @@ import java.util.Map;
 public class jwtUtil {
 
     @Value("${jwt.secret}")
-    private String secret;
+    private String secret;//乱码的，创造密钥的原材料
 
     @Value("${jwt.expire}")
     private long expire;
