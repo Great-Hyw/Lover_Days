@@ -1,9 +1,9 @@
-package com.wei.service;
+package com.wei.Service;
 
-import com.wei.mapper.LoginMapper;
-import com.wei.util.CullentUtil;
-import com.wei.util.JwtUtil;
-import com.wei.pojo.User;
+import com.wei.Mapper.loginMapper;
+import com.wei.UTIL.CullentUtil;
+import com.wei.UTIL.jwtUtil;
+import com.wei.pojo.user;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,40 +14,38 @@ import java.time.LocalDateTime;
 
 @Service
 @Slf4j
-public class LoginImpl implements LoginService {
+public class loginImpl implements loginService {
     @Autowired
-    private LoginMapper loginMapper;
+    private loginMapper loginMapper;
     @Autowired
-    private JwtUtil jwtUtil;
+    private jwtUtil jwtUtil;
 
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
     @Override
-    public User login(User user) {
+    public user login(user user) {
         boolean matches=false;
-        User user1=loginMapper.login(user);
-        log.info("``````"+"此为登录界面");
+        user user1=loginMapper.login(user);
+        log.info("``````"+"此为登录界面"+user);
         if(user1==null){//账号不为空
-            log.error("账号不存在");
+
              return null;
         }
 
         matches = encoder.matches(user.getPassword(), user1.getPassword());
-        try {
-            if (matches) {
-                String s = jwtUtil.CreatToken(user1.getUserName(), user1.getId());
-                user1.setToken(s);
-            }
-            return matches ? user1 : null;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        log.info("密码"+matches+user1.toString());
+        if(matches) {
+            String s = jwtUtil.CreatToken(user1.getUserName(), user1.getId());
+            user1.setToken(s);
         }
+        return matches?user1:null;
+
     }
 
     @Override
     @Transactional(rollbackFor = {Exception.class})
-    public User register(User user) {
+    public user register(user user) {
 
-        User login = loginMapper.login(user);
+        user login = loginMapper.login(user);
 
         if(login!=null){//账户已存在
             return null;
@@ -63,16 +61,18 @@ public class LoginImpl implements LoginService {
 
         loginMapper.register(user);
 
+
+
         return user;
     }
 
     @Override
-    public User GetUser() {
+    public user GetUser() {
 
         Integer id= CullentUtil.get();
         log.info("当前用户"+id);
 
-        User user= loginMapper.GetUser(id);
+        user user= loginMapper.GetUser(id);
 
         return user;
 

@@ -1,4 +1,4 @@
-package com.wei.util;
+package com.wei.UTIL;
 
 import com.wei.pojo.TurnstileResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +12,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
 @Slf4j
 @Component
 public class RoobitsUtil {

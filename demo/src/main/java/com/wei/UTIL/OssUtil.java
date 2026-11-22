@@ -1,4 +1,4 @@
-package com.wei.util;
+package com.wei.UTIL;
 
 import com.aliyun.oss.*;
 import com.aliyun.oss.common.auth.CredentialsProviderFactory;

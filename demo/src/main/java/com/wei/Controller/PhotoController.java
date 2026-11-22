@@ -1,8 +1,8 @@
-package com.wei.controller;
+package com.wei.Controller;
 
 
-import com.wei.result.Result;
-import com.wei.service.PhotoService;
+import com.wei.Result.result;
+import com.wei.Service.PhotoService;
 import com.wei.pojo.Photo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class PhotoController {
     private PhotoService photoService;
 
     @PostMapping("/upload")
-    public Result Rupload(@RequestParam("file") MultipartFile file, @RequestParam("anniversaryId") Integer id) {
+    public result Rupload(@RequestParam("file") MultipartFile file,@RequestParam("anniversaryId") Integer id) {
 
 
         Photo photo = photoService.upload(file,id);
@@ -28,41 +28,41 @@ public class PhotoController {
 
         log.info("图片url" + photo);
         // 返回201状态码
-        return Result.success(photo);
+        return result.success(photo);
     }
 
 
     @GetMapping("/photos")
-    public Result GetP(@RequestParam(required = false) Integer lastId) {
+    public result GetP(@RequestParam(required = false) Integer lastId) {
 
 
         Map<String,Object> p=new HashMap<>();
 
          List<Photo>photoList = photoService.getAll(lastId);
          if(photoList.isEmpty()){
-             return Result.success("目前还没图片");
+             return result.success("目前还没图片");
          }
          p.put("list",photoList);
          if(photoList.size()<3){
              p.put("hashMore",false);
          }
          else {
-             p.put("hashMore",true);
+             p.put("hasMore",true);
          }
 
 
-        return Result.success(p);
+        return result.success(p);
     }
 
     @DeleteMapping("/photos")
-    public Result Delete(@RequestBody Photo key) {
+    public result Delete(@RequestBody Photo key) {
 
        Integer i= photoService.delete(key);
 
        if(i==0){
-           return Result.error("删除错误");
+           return result.error("删除错误");
        }
-        return Result.success();
+        return result.success();
     }
 
 }

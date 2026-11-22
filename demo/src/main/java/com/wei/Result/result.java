@@ -1,4 +1,4 @@
-package com.wei.result;
+package com.wei.Result;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,41 +9,35 @@ import lombok.extern.slf4j.Slf4j;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Result {
+public class result {
     private Integer code;
     private String message;
     private Object data;
 
-    public static Result success() {
-        Result result = new Result();
+    public static result success() {
+        result result = new result();
         result.code = 0;
         result.message = "success";
         return result;
     }
 
-    public static Result success(Object data) {
-        Result result = new Result();
+    public static result success(Object data) {
+        result result = new result();
         result.code = 0;
         result.message = "success";
         result.data = data;
         return result;
     }
 
-    public static Result error(String mes){
-        Result result=new Result();
+    public static result error(String mes){
+        result result=new result();
         result.code=400;
         result.message=mes;
         return result;
     }
-    public static Result error(String mes,Integer code){
-        Result result=new Result();
-        result.code=code;
-        result.message=mes;
-        return result;
-    }
 
-    public  static Result TokenError(String mes){
-        Result result=new Result();
+    public  static result TokenError(String mes){
+        result result=new result();
         result.code=401;
         result.message=mes;
         return result;

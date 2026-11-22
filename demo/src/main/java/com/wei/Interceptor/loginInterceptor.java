@@ -1,11 +1,10 @@
-package com.wei.interceptor;
+package com.wei.Interceptor;
 
-import com.wei.util.CullentUtil;
-import com.wei.util.JwtUtil;
+import com.wei.UTIL.CullentUtil;
+import com.wei.UTIL.jwtUtil;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.jspecify.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,32 +13,28 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 @Component
 @Slf4j
-public class LoginInterceptor implements HandlerInterceptor {
+public class loginInterceptor implements HandlerInterceptor {
 
     @Autowired
-    private JwtUtil jwtUtil;//令牌工具类
+    private jwtUtil jwtUtil;//令牌工具类
 
     /*
      * 拦截器
      * */
     @Override
-    public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String jwt=null;
-
-        if("OPTIONS".equalsIgnoreCase(request.getMethod())){
-            return true;//预检放行
-        }
-
         String token = request.getHeader("Authorization");
-        if(token == null || !token.startsWith("Bearer ")){
-           response.setStatus(401);
-           return false;
+        if(token != null && token.startsWith("Bearer ")){
+            jwt = token.substring(7); // 截掉 "Bearer " 这7个字符
+            log.info("令牌"+jwt);
+              if (jwt == null || jwt.isEmpty()) {
+                       response.setStatus(401);
+                      return false;//不放行
+                  }
         }
-        jwt = token.substring(7); // 截掉 "Bearer " 这7个字符
-        if (jwt.isEmpty()) {
-            response.setStatus(401);
-            return false;//不放行
-        }
+        //获取token（是否存在令牌，有进行令牌解析，无则返回401表示未登录）
+
         //令牌解析
         try {
             Claims claims = jwtUtil.praseToken(jwt);
@@ -47,7 +42,8 @@ public class LoginInterceptor implements HandlerInterceptor {
             CullentUtil.set(id);
 
         } catch (Exception e) {//令牌非法返回401
-            log.error("token非法");
+            log.info("token非法");
+
             response.setStatus(401);
             return false;//不放行
         }
@@ -55,7 +51,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     }
 
     @Override
-    public void afterCompletion( @NonNull HttpServletRequest request, @NonNull  HttpServletResponse response, Object handler, @Nullable Exception ex) throws Exception {
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable Exception ex) throws Exception {
         CullentUtil.remove();
     }
 

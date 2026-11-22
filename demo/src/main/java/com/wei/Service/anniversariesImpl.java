@@ -1,11 +1,11 @@
-package com.wei.service;
+package com.wei.Service;
 
-import com.wei.mapper.PhotoMapper;
-import com.wei.mapper.AnniversariesMapper;
-import com.wei.util.CullentUtil;
-import com.wei.util.OssUtil;
+import com.wei.Mapper.PhotoMapper;
+import com.wei.Mapper.anniversariesMapper;
+import com.wei.UTIL.CullentUtil;
+import com.wei.UTIL.OssUtil;
 import com.wei.pojo.Photo;
-import com.wei.pojo.Anniversaries;
+import com.wei.pojo.anniversaries;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,10 +15,10 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class AnniversariesImpl implements AnniversariesService {
+public class anniversariesImpl implements anniversariesService {
 
     @Autowired
-    private AnniversariesMapper ANN;
+    private anniversariesMapper ANN;
 
     @Autowired
     private PhotoMapper p;
@@ -27,23 +27,23 @@ public class AnniversariesImpl implements AnniversariesService {
     private OssUtil ossUtil;
 
     @Override
-    public List<Anniversaries> Get() {
+    public List<anniversaries> Get() {
 
         Integer userId = CullentUtil.get();
 
 
-        List<Anniversaries> anniversaries = ANN.Get(userId);
+        List<anniversaries> anniversaries = ANN.Get(userId);
 
         return anniversaries;
     }
 
     @Override
-    public Integer insertAnn(Anniversaries a) {
+    public Integer insertAnn(anniversaries a) {
 
         //先获取当前token里的userId存入实体类中
         a.setUserId(CullentUtil.get());
 
-        Anniversaries b = ANN.getAnn(a);//获取当前用户title是否重复
+        anniversaries b = ANN.getAnn(a);//获取当前用户title是否重复
 
         if (b != null) {//有重复
             return -1;
@@ -61,14 +61,14 @@ public class AnniversariesImpl implements AnniversariesService {
 
 
     @Override
-    public Anniversaries GetannID(Integer id) {
-        Anniversaries b = new Anniversaries();
+    public anniversaries GetannID(Integer id) {
+        anniversaries b = new anniversaries();
 
         b.setUserId(CullentUtil.get());
 
         b.setId(id);
 
-        Anniversaries a = ANN.GetannID(b);
+        anniversaries a = ANN.GetannID(b);
 
         return a;
     }
@@ -80,7 +80,7 @@ public class AnniversariesImpl implements AnniversariesService {
      *
      * */
     @Override
-    public Anniversaries update(Anniversaries a) {
+    public anniversaries update(anniversaries a) {
 
         LocalDate now = LocalDate.now();
 
@@ -93,7 +93,7 @@ public class AnniversariesImpl implements AnniversariesService {
         log.info("更新行数" + i + "更新列表id" + a.getId() + "本用户id" + a.getUserId());
 
         if (i != 0) {
-            Anniversaries b = ANN.GetannID(a);
+            anniversaries b = ANN.GetannID(a);
             return b;
         }
 
@@ -103,11 +103,15 @@ public class AnniversariesImpl implements AnniversariesService {
     @Override
     public Object delete(Integer id) {
         try {
-            Anniversaries b = new Anniversaries();
+            anniversaries b = new anniversaries();
             b.setId(id);
             b.setUserId(CullentUtil.get());
 
-            Anniversaries c = ANN.GetannID(b);
+            /*
+             * 先查当前该纪念日的bgImage和key(第一次添加纪念日的时候还没key)
+             * */
+
+            anniversaries c = ANN.GetannID(b);
 
             if(c==null){//不存在纪念日
                 return null;
@@ -118,7 +122,7 @@ public class AnniversariesImpl implements AnniversariesService {
                 c.setUserId(CullentUtil.get());
                 Photo po = p.selectKey(c);
                 if (i > 0) {
-                    List<Anniversaries> list = ANN.selectBgimage(b);
+                    List<anniversaries> list = ANN.selectBgimage(b);
                     if (list.isEmpty()) {//没别的引用删除photo里的背景图和阿里云
                         p.deleteBgImage(c);
 

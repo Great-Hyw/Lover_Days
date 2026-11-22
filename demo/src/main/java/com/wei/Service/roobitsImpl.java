@@ -1,6 +1,6 @@
-package com.wei.service;
+package com.wei.Service;
 
-import com.wei.util.RoobitsUtil;
+import com.wei.UTIL.RoobitsUtil;
 import com.wei.pojo.TurnstileResponse;
 import com.wei.pojo.roobit;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class RoobitsImpl implements RoobitsService {
+public class roobitsImpl implements RootbitsServivce{
 
     @Autowired
     private RoobitsUtil RoobitsUtil;

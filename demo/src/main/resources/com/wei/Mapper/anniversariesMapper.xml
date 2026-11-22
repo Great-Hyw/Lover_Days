@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wei.mapper.AnniversariesMapper">
+<mapper namespace="com.wei.Mapper.anniversariesMapper">
 
     <update id="update">
         update user.anneriversaries
@@ -39,8 +39,6 @@
             </if> </set>
             <where>
                 id=#{id}
-                and
-                user_id=#{userId}
             </where>
 
 
