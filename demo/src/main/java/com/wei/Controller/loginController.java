@@ -1,8 +1,8 @@
-package com.wei.Controller;
+package com.wei.controller;
 
-import com.wei.Result.result;
-import com.wei.Service.loginService;
-import com.wei.pojo.user;
+import com.wei.result.Result;
+import com.wei.service.LoginService;
+import com.wei.pojo.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,46 +13,46 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("/auth")
-public class loginController {
+public class LoginController {
     @Autowired
-    private loginService loginService;
+    private LoginService loginService;
 
     @RequestMapping("/login")
-    public result login(@RequestBody user use) {
-        log.info("开始登录~");
+    public Result login(@RequestBody User use) {
+        log.info("开始登录~"+use.toString());
         if (use == null) {
-            return result.error("字段缺失或者空的");
+            return Result.error("字段缺失或者空的");
         }
 
-        user user = loginService.login(use);
+        User user = loginService.login(use);
 
         if (user != null) {
-            log.info("结果" + user.toString());
-            return result.success(user);
+            log.debug("结果" + user.toString());
+            return Result.success(user);
         }
-        return result.error("密码或用户名错误");
+        return Result.error("密码或用户名错误");
     }
 
     @RequestMapping("/register")
-    public result Register(@RequestBody user user) {
+    public Result Register(@RequestBody User user) {
         log.info("接收的前端数据" + user.toString());
-        user i = loginService.register(user);
+        User i = loginService.register(user);
 
         if (i == null) {
-            return result.error("用户名已存在");
+            return Result.error("用户名已存在");
         }
-        return result.success(i);
+        return Result.success(i);
     }
     @GetMapping("/profile")
-    public result GetUser(){
+    public Result GetUser(){
 
-       user user= loginService.GetUser();
+       User user= loginService.GetUser();
 
         if(user==null){
-            return result.TokenError("toke缺失/无效/过期");
+            return Result.TokenError("toke缺失/无效/过期");
         }
 
-        return result.success(user);
+        return Result.success(user);
     }
 
 

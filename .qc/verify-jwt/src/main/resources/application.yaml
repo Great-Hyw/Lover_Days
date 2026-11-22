@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: demo
+  # 未显式指定 profile 时默认按 dev 启动；生产用 --spring.profiles.active=prod
+  profiles:
+    default: dev
+  # 环境相关的值（数据库口令、JWT 密钥等）不放这里，也不打包进 jar：
+  # 放在项目根目录 demo/env/<profile>.env（已 gitignore，提交时请只提交 env/example.env）。
+  # 相对于「启动时的工作目录」解析，所以请在 demo/ 目录下启动程序。
+  # 生产环境可以不给文件，直接用系统环境变量注入 DB_IP、SPRING_DATASOURCE_USERNAME、
+  # SPRING_DATASOURCE_PASSWORD、JWT_SECRET、CF_SITEKEY（系统环境变量优先级更高）。
+  config:
+    import: optional:file:env/${spring.profiles.active:dev}.env[.properties]
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DB_IP}:3306/user
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+  servlet:
+    multipart:
+      max-file-size: 8MB
+      max-request-size: 8MB
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:com/wei/mapper/*.xml
+
+server:
+  port: 8080
+
+jwt:
+  secret: ${JWT_SECRET}
+  expire: 1800000
+
+aliyun:
+  MAX_SIZE: 8388608
+  ENDPOINT: "https://oss-cn-beijing.aliyuncs.com"
+  BUCKET_NAME: "wei-p"
+  REGION: "cn-beijing"
+
+Cf:
+  siteKey: ${CF_SITEKEY}
+  SITEVERIFY_URL: https://challenges.cloudflare.com/turnstile/v0/siteverify

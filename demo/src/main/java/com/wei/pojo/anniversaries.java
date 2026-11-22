@@ -7,12 +7,11 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class anniversaries {
+public class Anniversaries {
     private Integer id ;
     private Integer userId;
     private  String title;
@@ -26,5 +25,5 @@ public class anniversaries {
     private String bgImage;
     private LocalDate createdAt;
     private LocalDate updatedAt;
-
+    private String ikey;
 }

@@ -1,0 +1,7 @@
+BOOT-INF/classes/com/wei/mapper/
+BOOT-INF/classes/com/wei/mapper/AnniversariesMapper.class
+BOOT-INF/classes/com/wei/mapper/AnniversariesMapper.xml
+BOOT-INF/classes/com/wei/mapper/BirthdayMapper.class
+BOOT-INF/classes/com/wei/mapper/LoginMapper.class
+BOOT-INF/classes/com/wei/mapper/PhotoMapper.class
+BOOT-INF/classes/com/wei/mapper/PhotoMapper.xml

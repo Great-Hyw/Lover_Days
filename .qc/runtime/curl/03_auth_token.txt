@@ -1,0 +1,36 @@
+### 9) GET /auth/profile with token signed by ASCII-bytes key
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 160
+Date: Sat, 21 Nov 2026 08:25:44 GMT
+
+{"code":0,"message":"success","data":{"userName":"qc_probe_a_ee60c1fd","nickName":"QC A","avatar":null,"id":29,"creatTime":null,"updateTime":null,"token":null}}
+
+### 10) GET /anniversaries with token
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 40
+Date: Sat, 21 Nov 2026 08:25:44 GMT
+
+{"code":0,"message":"success","data":[]}
+
+### 11) invalid token (bad signature)
+HTTP/1.1 401 
+Content-Length: 0
+Date: Sat, 21 Nov 2026 08:25:44 GMT
+
+
+
+### 12) expired token
+HTTP/1.1 401 
+Content-Length: 0
+Date: Sat, 21 Nov 2026 08:25:44 GMT
+
+
+
+### 13) Authorization without Bearer prefix
+HTTP/1.1 401 
+Content-Length: 0
+Date: Sat, 21 Nov 2026 08:25:44 GMT
+
+

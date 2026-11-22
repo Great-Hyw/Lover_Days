@@ -1,6 +1,6 @@
 package com.wei.config;
 
-import com.wei.Interceptor.loginInterceptor;
+import com.wei.interceptor.LoginInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -13,10 +13,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  *
  * */
 @Configuration
-public class WebCongin implements WebMvcConfigurer {
+public class WebConfig implements WebMvcConfigurer {
 
     @Autowired
-    private loginInterceptor loginInterceptor;
+    private LoginInterceptor loginInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
