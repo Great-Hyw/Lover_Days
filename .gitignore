@@ -23,6 +23,11 @@ demo/target/
 vvv/
 _write_edit.js
 
+# Wrangler / Workers Builds 本地状态
+.wrangler/
+.dev.vars*
+!.dev.vars.example
+
 # DSH 审计/恢复过程产物
 .dsh-verify/
 .dsh-acl-recovery/
