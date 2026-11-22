@@ -1,0 +1,7 @@
+BOOT-INF/classes/com/wei/pojo/
+BOOT-INF/classes/com/wei/pojo/Anniversaries.class
+BOOT-INF/classes/com/wei/pojo/Birthday.class
+BOOT-INF/classes/com/wei/pojo/Photo.class
+BOOT-INF/classes/com/wei/pojo/roobit.class
+BOOT-INF/classes/com/wei/pojo/TurnstileResponse.class
+BOOT-INF/classes/com/wei/pojo/User.class

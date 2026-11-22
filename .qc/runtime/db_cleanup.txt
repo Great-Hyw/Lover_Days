@@ -1,0 +1,17 @@
+=== cleanup executed 2026-11-21 16:30:00 ===
+4
+1
+0
+4
+=== post-cleanup counts ===
+tb_use	25
+anneriversaries	2
+photo	1
+birth	1
+=== residual probe rows (expect 0) ===
+0
+=== original user 12 data intact ===
+46	12	问我	1926-10-23
+47	12	ssss	2026-10-24
+47	12	anniversary/u-001/f2dd8e2a-0aea-4783-a2b6-92855eadc397.jpg
+13	12

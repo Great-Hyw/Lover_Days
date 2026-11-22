@@ -1,4 +1,4 @@
-package com.wei.UTIL;
+package com.wei.util;
 
 
 /*

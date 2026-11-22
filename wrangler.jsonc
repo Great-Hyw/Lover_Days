@@ -1,0 +1,24 @@
+{
+  // Cloudflare Worker 配置（Workers Builds 部署用）
+  // 文档：https://developers.cloudflare.com/workers/wrangler/configuration/
+  //
+  // ⚠️ name 必须与 Cloudflare Dashboard 里该 Worker 的名称完全一致
+  //    （Workers & Pages → 选中该 Worker 后，标题/概览里显示的那个名字）。
+  //    名称不一致时，`npx wrangler preview` 不会更新你现有的 Worker，
+  //    而是会另外创建一个同名之外的 Worker。
+  "name": "lover-days",
+
+  // 决定 Workers 运行时兼容行为，写当天日期即可
+  "compatibility_date": "2026-11-22",
+
+  // Vite 构建产物目录（由 `npm run build` 生成）
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application"
+  },
+
+  // Worker Previews 配置块：`npx wrangler preview`（Workers Builds 预览分支的
+  // 默认预览命令）要求该块存在，可以留空。Preview 专用的 vars/绑定写在这里，
+  // 顶层配置则代表生产环境。
+  "previews": {}
+}

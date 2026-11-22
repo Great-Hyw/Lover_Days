@@ -1,0 +1,50 @@
+### 44) POST /welcome with fake turnstile token (network-dependent)
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 82
+Date: Sat, 21 Nov 2026 08:27:04 GMT
+
+{"code":400,"message":"Verification failed: [invalid-input-response]","data":null}
+
+### 45) POST /upload no file (param missing)
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 55
+Date: Sat, 21 Nov 2026 08:27:04 GMT
+
+{"code":500,"message":"服务端有异常","data":null}
+
+### 46) POST /upload text file (invalid MIME, should be rejected before OSS)
+
+
+### 47) OPTIONS preflight /anniversaries with Origin
+HTTP/1.1 200 
+Allow: GET, HEAD, POST, PUT, DELETE, OPTIONS, PATCH
+Content-Length: 0
+Date: Sat, 21 Nov 2026 08:27:05 GMT
+
+
+
+### 48) POST /anniversaries title too long (50 chars)
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 55
+Date: Sat, 21 Nov 2026 08:27:05 GMT
+
+{"code":500,"message":"服务端有异常","data":null}
+
+### 49) register user_name too long (30 chars)
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 55
+Date: Sat, 21 Nov 2026 08:27:05 GMT
+
+{"code":500,"message":"服务端有异常","data":null}
+
+### 50) login SQL injection attempt
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 61
+Date: Sat, 21 Nov 2026 08:27:06 GMT
+
+{"code":400,"message":"密码或用户名错误","data":null}

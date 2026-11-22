@@ -1,0 +1,29 @@
+### 1) GET /anniversaries (no token)
+HTTP/1.1 401 
+Content-Length: 0
+Date: Sat, 21 Nov 2026 08:24:57 GMT
+
+
+
+### 2) GET /actuator/health (no token)
+HTTP/1.1 200 
+Content-Type: application/vnd.spring-boot.actuator.v3+json
+Transfer-Encoding: chunked
+Date: Sat, 21 Nov 2026 08:25:03 GMT
+
+{"groups":["liveness","readiness"],"status":"UP"}
+
+### 3) POST /auth/login wrong creds
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 61
+Date: Sat, 21 Nov 2026 08:25:03 GMT
+
+{"code":400,"message":"密码或用户名错误","data":null}
+
+### 4) GET /nonexistent (no token)
+HTTP/1.1 401 
+Content-Length: 0
+Date: Sat, 21 Nov 2026 08:25:03 GMT
+
+

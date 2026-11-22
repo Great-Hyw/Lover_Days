@@ -1,0 +1,39 @@
+### 14) A: POST /anniversaries create
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 258
+Date: Sat, 21 Nov 2026 08:26:06 GMT
+
+{"code":0,"message":"success","data":{"id":48,"userId":29,"title":"qc_probe_anniv_A","date":"2026-11-21","type":"birthday","icon":"cake","color":"#ff0000","isYearly":true,"note":"qc note","bgImage":null,"createdAt":"2026-11-21","updatedAt":null,"ikey":null}}
+
+### 15) A: GET /anniversaries list
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 262
+Date: Sat, 21 Nov 2026 08:26:06 GMT
+
+{"code":0,"message":"success","data":[{"id":48,"userId":null,"title":"qc_probe_anniv_A","date":"2026-11-21","type":"birthday","icon":"cake","color":"#ff0000","isYearly":true,"note":"qc note","bgImage":null,"createdAt":"2026-11-21","updatedAt":null,"ikey":null}]}
+
+### 16) A: POST duplicate title
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 48
+Date: Sat, 21 Nov 2026 08:26:07 GMT
+
+{"code":400,"message":"title重复","data":null}
+
+### 17) B: POST /anniversaries create (B's own)
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 250
+Date: Sat, 21 Nov 2026 08:26:07 GMT
+
+{"code":0,"message":"success","data":{"id":49,"userId":30,"title":"qc_probe_anniv_B","date":"2026-11-21","type":"birthday","icon":null,"color":null,"isYearly":null,"note":"B data","bgImage":null,"createdAt":"2026-11-21","updatedAt":null,"ikey":null}}
+
+### 18) B: GET /anniversaries list
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 254
+Date: Sat, 21 Nov 2026 08:26:07 GMT
+
+{"code":0,"message":"success","data":[{"id":49,"userId":null,"title":"qc_probe_anniv_B","date":"2026-11-21","type":"birthday","icon":null,"color":null,"isYearly":null,"note":"B data","bgImage":null,"createdAt":"2026-11-21","updatedAt":null,"ikey":null}]}

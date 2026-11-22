@@ -1,4 +1,4 @@
-package com.wei.Service;
+package com.wei.service;
 
 import com.wei.pojo.Photo;
 import org.springframework.web.multipart.MultipartFile;

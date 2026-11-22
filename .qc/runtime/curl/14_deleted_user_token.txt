@@ -1,0 +1,14 @@
+### 68) token of a DELETED user (id 29) still passes signature check
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 61
+Date: Sat, 21 Nov 2026 08:30:06 GMT
+
+{"code":401,"message":"toke缺失/无效/过期","data":null}
+### 69) anniversaries of deleted user -> empty
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 40
+Date: Sat, 21 Nov 2026 08:30:06 GMT
+
+{"code":0,"message":"success","data":[]}

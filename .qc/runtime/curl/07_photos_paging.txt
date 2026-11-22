@@ -1,0 +1,31 @@
+### 31) A: GET /photos (5 rows in DB, expect 3 + hashMore=true)
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 571
+Date: Sat, 21 Nov 2026 08:26:48 GMT
+
+{"code":0,"message":"success","data":{"hashMore":true,"list":[{"key":"qc_probe_key_5","id":52,"userId":null,"url":"https://example.invalid/qc_probe_5.png","name":"qc_probe_5.png","size":1005,"lastId":null,"createdAt":"2026-11-21"},{"key":"qc_probe_key_4","id":51,"userId":null,"url":"https://example.invalid/qc_probe_4.png","name":"qc_probe_4.png","size":1004,"lastId":null,"createdAt":"2026-11-21"},{"key":"qc_probe_key_3","id":50,"userId":null,"url":"https://example.invalid/qc_probe_3.png","name":"qc_probe_3.png","size":1003,"lastId":null,"createdAt":"2026-11-21"}]}}
+
+### 32) A: GET /photos?lastId=50 (expect ids 49,48 = 2 rows, hashMore=false)
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 403
+Date: Sat, 21 Nov 2026 08:26:48 GMT
+
+{"code":0,"message":"success","data":{"hashMore":false,"list":[{"key":"qc_probe_key_2","id":49,"userId":null,"url":"https://example.invalid/qc_probe_2.png","name":"qc_probe_2.png","size":1002,"lastId":null,"createdAt":"2026-11-21"},{"key":"qc_probe_key_1","id":48,"userId":null,"url":"https://example.invalid/qc_probe_1.png","name":"qc_probe_1.png","size":1001,"lastId":null,"createdAt":"2026-11-21"}]}}
+
+### 33) A: GET /photos?lastId=50&limit=3 (limit param ignored?)
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 403
+Date: Sat, 21 Nov 2026 08:26:48 GMT
+
+{"code":0,"message":"success","data":{"hashMore":false,"list":[{"key":"qc_probe_key_2","id":49,"userId":null,"url":"https://example.invalid/qc_probe_2.png","name":"qc_probe_2.png","size":1002,"lastId":null,"createdAt":"2026-11-21"},{"key":"qc_probe_key_1","id":48,"userId":null,"url":"https://example.invalid/qc_probe_1.png","name":"qc_probe_1.png","size":1001,"lastId":null,"createdAt":"2026-11-21"}]}}
+
+### 34) A: GET /photos?lastId=abc (type mismatch)
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 55
+Date: Sat, 21 Nov 2026 08:26:48 GMT
+
+{"code":500,"message":"服务端有异常","data":null}
