@@ -1,10 +1,10 @@
-package com.wei.Service;
+package com.wei.service;
 
 
 import com.wei.pojo.TurnstileResponse;
 import com.wei.pojo.roobit;
 import jakarta.servlet.http.HttpServletRequest;
 
-public interface RootbitsServivce {
+public interface RoobitsService {
     public TurnstileResponse submitForm(roobit roobit, HttpServletRequest request);
 }

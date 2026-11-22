@@ -6,11 +6,13 @@ import { useAnniversaryStore } from '@/stores/anniversary'
 import { showToast } from '@/utils/toast'
 import { launchPortal } from '@/utils/login-portal'
 import roobits from '@/components/roobits.vue'
+import { removeCookie, setCookie } from '../utils/cookie';
 
 const router = useRouter()
 const route = useRoute()
 const authStore = useAuthStore()
 const anniversaryStore = useAnniversaryStore()
+const token=ref(' ');
 
 const mode = ref('login')
 const loading = ref(false)
@@ -26,6 +28,27 @@ const errors = reactive({
   password: '',
   nickname: ''
 })
+
+
+/*
+*人机验证的组件脚本
+*/
+const onSuccess=(t)=>{
+  token.value=t;
+}
+const onError=(error)=>{
+  console.log(error);
+}
+const onExpire=()=>{
+  console.log("cf令牌到期");
+  removeCookie(rtoken);
+}
+const onTimeout=()=>{
+  console.log("cf超时！！！");
+  
+}
+
+
 
 const isLogin = computed(() => mode.value === 'login')
 
@@ -158,7 +181,14 @@ async function onSubmit() {
       </div>
 
       <div class="login-card">
-    
+       <roobits 
+       @success="onSuccess"
+       @error="onError"
+       @expire="onExpire"
+       @timeout="onTimeout"                
+       >
+
+       </roobits>
         <div class="tabs">
           <button
             type="button"
@@ -176,6 +206,7 @@ async function onSubmit() {
           >
             注册
           </button>
+
         </div>
 
         <form class="form" novalidate @submit.prevent="onSubmit">

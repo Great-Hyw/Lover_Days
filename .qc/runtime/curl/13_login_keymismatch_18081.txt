@@ -1,0 +1,15 @@
+### 65) [transient 18081, JWT_SECRET=base64url-safe 64B, SERVER_PORT env] login A correct creds
+{"code":0,"message":"success","data":{"userName":"qc_probe_a_ee60c1fd","nickName":"QC A","avatar":null,"id":29,"creatTime":"2026-11-21T16:25:14","updateTime":null,"token":"eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjI5LCJ1c2VybmFtZSI6InFjX3Byb2JlX2FfZWU2MGMxZmQiLCJleHAiOjE3OTUyNTE1NTV9.Ir_mqOj2IS4Lksp5u63W_On-Cfdv5uYUHF4Ng1qhdu4"}}
+TOKEN_PREFIX=eyJhbGciOiJIUzI1NiJ9.eyJ1... LEN=149
+
+### 66) use that freshly issued token on 18081
+HTTP/1.1 401 
+Content-Length: 0
+Date: Sat, 21 Nov 2026 08:29:15 GMT
+
+
+### 67) same token against 18080 instance (different key derivation? same ASCII secret differs, expect 401)
+HTTP/1.1 401 
+Content-Length: 0
+Date: Sat, 21 Nov 2026 08:29:15 GMT
+

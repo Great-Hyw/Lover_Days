@@ -1,8 +1,8 @@
-package com.wei.Controller;
+package com.wei.controller;
 
-import com.wei.Result.result;
-import com.wei.Service.anniversariesService;
-import com.wei.pojo.anniversaries;
+import com.wei.result.Result;
+import com.wei.service.AnniversariesService;
+import com.wei.pojo.Anniversaries;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,20 +13,20 @@ import java.util.List;
 @RestController
 @RequestMapping("/anniversaries")
 @Slf4j
-public class anniversariesController {
+public class AnniversariesController {
 
     @Autowired
-    private anniversariesService ann;
+    private AnniversariesService ann;
 
     @PostMapping()
-    public result insertAnnersaries(@RequestBody anniversaries a) {
+    public Result insertAnnersaries(@RequestBody Anniversaries a) {
 
         Integer i = ann.insertAnn(a);
 
         if (i <1) {//title重复
-            return result.error("title重复");
+            return Result.error("title重复");
         }
-        return result.success(a);
+        return Result.success(a);
     }
 
     /*
@@ -34,12 +34,12 @@ public class anniversariesController {
      * 获取整个列表
      * */
     @GetMapping()
-    public result selectAnn() {
+    public Result selectAnn() {
 
-        List<anniversaries> anniversaries = ann.Get();
+        List<Anniversaries> anniversaries = ann.Get();
 
 
-        return result.success(anniversaries);
+        return Result.success(anniversaries);
     }
 
     /*
@@ -47,34 +47,34 @@ public class anniversariesController {
      * 查询单个列表
      * */
     @GetMapping("/{id}")
-    public result GetAnn(@PathVariable Integer id) {
+    public Result GetAnn(@PathVariable Integer id) {
 
-        anniversaries a = ann.GetannID(id);
+        Anniversaries a = ann.GetannID(id);
 
 
-        return result.success(a);
+        return Result.success(a);
     }
 
 
     @PutMapping("/{id}")
-    public result updateAnn(@PathVariable Integer id ,@RequestBody anniversaries a ) {
+    public Result updateAnn(@PathVariable Integer id , @RequestBody Anniversaries a ) {
 
         a.setId(id);
 
-        anniversaries b= ann.update(a);
+        Anniversaries b= ann.update(a);
 
-        return result.success(b);
+        return Result.success(b);
     }
 
     @DeleteMapping("/{id}")
-    public result deleteAnn(@PathVariable Integer id){
+    public Result deleteAnn(@PathVariable Integer id){
 
         Object a=ann.delete(id);
         if(a==null){
-            return result.TokenError("纪念日不存在");
+            return Result.error("纪念日不存在",404);
         }
 
-        return  result.success();
+        return  Result.success();
     }
 
 }

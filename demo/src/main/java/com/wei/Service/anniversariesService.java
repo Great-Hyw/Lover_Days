@@ -1,17 +1,17 @@
-package com.wei.Service;
+package com.wei.service;
 
-import com.wei.pojo.anniversaries;
+import com.wei.pojo.Anniversaries;
 
 import java.util.List;
 
-public interface anniversariesService {
-    List< anniversaries >Get();
+public interface AnniversariesService {
+    List<Anniversaries>Get();
 
-    Integer insertAnn(anniversaries a);
+    Integer insertAnn(Anniversaries a);
 
-    anniversaries GetannID(Integer id);
+    Anniversaries GetannID(Integer id);
 
-    anniversaries update(anniversaries id);
+    Anniversaries update(Anniversaries id);
 
     Object delete(Integer id);
 }

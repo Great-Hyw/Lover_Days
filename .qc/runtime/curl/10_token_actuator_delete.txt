@@ -1,0 +1,62 @@
+### 51) token signed with BASE64-DECODED secret (what CreatToken does) -> praseToken result
+HTTP/1.1 401 
+Content-Length: 0
+Date: Sat, 21 Nov 2026 08:27:28 GMT
+
+
+
+### 52) GET /actuator/env with token
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 55
+Date: Sat, 21 Nov 2026 08:27:28 GMT
+
+{"code":404,"message":"服务端有异常","data":null}
+
+### 53) GET /actuator/health with token
+HTTP/1.1 200 
+Content-Type: application/vnd.spring-boot.actuator.v3+json
+Transfer-Encoding: chunked
+Date: Sat, 21 Nov 2026 08:27:28 GMT
+
+{"groups":["liveness","readiness"],"status":"UP"}
+
+### 54) GET /anniversaries with Origin header (CORS actual request)
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 274
+Date: Sat, 21 Nov 2026 08:27:28 GMT
+
+{"code":0,"message":"success","data":[{"id":48,"userId":null,"title":"qc_probe_anniv_A_upd","date":"2026-11-21","type":"birthday","icon":"cake","color":"#ff0000","isYearly":true,"note":"updated","bgImage":null,"createdAt":"2026-11-21","updatedAt":"2026-11-21","ikey":null}]}
+
+### 55) A: DELETE own anniversary 48
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 42
+Date: Sat, 21 Nov 2026 08:27:28 GMT
+
+{"code":0,"message":"success","data":null}
+
+### 56) A: GET /anniversaries after delete
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 40
+Date: Sat, 21 Nov 2026 08:27:28 GMT
+
+{"code":0,"message":"success","data":[]}
+
+### 57) A: DELETE /photos with key qc_probe_key_1
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 49
+Date: Sat, 21 Nov 2026 08:27:29 GMT
+
+{"code":400,"message":"删除错误","data":null}
+
+### 58) A: DELETE /photos with nonexistent key
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 49
+Date: Sat, 21 Nov 2026 08:27:29 GMT
+
+{"code":400,"message":"删除错误","data":null}

@@ -1,0 +1,30 @@
+### 27) A: GET /photos (empty list, no photos yet)
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 58
+Date: Sat, 21 Nov 2026 08:26:35 GMT
+
+{"code":0,"message":"success","data":"目前还没图片"}
+
+### 28) A: GET /photos?lastId= (empty list with blank lastId)
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 58
+Date: Sat, 21 Nov 2026 08:26:35 GMT
+
+{"code":0,"message":"success","data":"目前还没图片"}
+
+### 29) A: GET /photos?lastId=999999
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 58
+Date: Sat, 21 Nov 2026 08:26:35 GMT
+
+{"code":0,"message":"success","data":"目前还没图片"}
+
+### 30) GET /photos no token
+HTTP/1.1 401 
+Content-Length: 0
+Date: Sat, 21 Nov 2026 08:26:35 GMT
+
+

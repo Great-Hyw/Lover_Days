@@ -1,11 +1,11 @@
-package com.wei.Service;
+package com.wei.service;
 
-import com.wei.pojo.user;
+import com.wei.pojo.User;
 
-public interface loginService {
-    user login(user user);
+public interface LoginService {
+    User login(User user);
 
-    user register(user user);
+    User register(User user);
 
-    user GetUser();
+    User GetUser();
 }

@@ -1,9 +1,12 @@
-package com.wei.UTIL;
+package com.wei.util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.io.Decoder;
+import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
+import org.bouncycastle.util.encoders.Base64Encoder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -15,37 +18,40 @@ import java.util.Map;
 
 @Slf4j
 @Component
-public class jwtUtil {
+public class JwtUtil {
 
-    @Value("${jwt.secret}")
-    private String secret;//乱码的，创造密钥的原材料
+    private final  long expire;
+    private final SecretKey key;
 
-    @Value("${jwt.expire}")
-    private long expire;
-    private SecretKey key;
+    public JwtUtil(  @Value("${jwt.secret}") String secret, @Value("${jwt.expire}") long expire) {
+     this.key =  Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
+     this.expire=expire;
+    }
 
-
-    public String CreatToken(String username,Integer id) {
-        key = Keys.hmacShaKeyFor(secret.getBytes());//创建密钥
-        Map<String, Object> chaim = new HashMap<>();
-        chaim.put("username", username);
-        chaim.put("userId",id);
-        String token = Jwts.builder()//创建jwt构建器
-                .signWith(key)//设置密钥
-                .addClaims(chaim)//添加声明
-                .setExpiration(new Date(System.currentTimeMillis() + expire))//设置过期时间
-                .compact();
-        log.info("生成token：{}", token);
-        return token;
+    public String CreatToken(String username, Integer id) throws Exception {
+        try {
+            Map<String, Object> chaim = new HashMap<>();
+            chaim.put("username", username);
+            chaim.put("userId", id);
+            String token = Jwts.builder()//创建jwt构建器
+                    .signWith(key, Jwts.SIG.HS256).claims(chaim).expiration(new Date(System.currentTimeMillis() + expire)).compact();
+            log.debug("用户登录成功签发token：id:{},username:{}", id, username);
+            return token;
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public Claims praseToken(String token) throws Exception {
-        key = Keys.hmacShaKeyFor(secret.getBytes());
-        return Jwts.parser()//创建解析器
-                .verifyWith(key)//设置密钥
-                .build()//创建解析器
-                .parseClaimsJws(token)//解析token
-                .getBody();//获取claims
+        try {
+
+            return Jwts.parser()//解析器配置器
+                    .verifyWith(key)//设置密钥
+                    .build()//解析器生效
+                    .parseSignedClaims(token).getPayload();
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

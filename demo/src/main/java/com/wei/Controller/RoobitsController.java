@@ -1,9 +1,9 @@
-package com.wei.Controller;
+package com.wei.controller;
 
 
-import com.wei.Result.result;
-import com.wei.Service.roobitsImpl;
-import com.wei.UTIL.RoobitsUtil;
+import com.wei.result.Result;
+import com.wei.service.RoobitsImpl;
+import com.wei.util.RoobitsUtil;
 import com.wei.pojo.TurnstileResponse;
 import com.wei.pojo.roobit;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,19 +20,19 @@ public class RoobitsController {
     @Autowired
     private RoobitsUtil RoobitsUtil;
     @Autowired
-    private roobitsImpl roobitsIpml;
+    private RoobitsImpl roobitsIpml;
 
 
     @PostMapping("/welcome")
-    public result submitForm(@RequestBody roobit roobit, HttpServletRequest request) {
+    public Result submitForm(@RequestBody roobit roobit, HttpServletRequest request) {
         TurnstileResponse validation =roobitsIpml.submitForm(roobit,request);
         if (validation.isSuccess()) {
-            return result.success("Form submitted successfully");
+            return Result.success("Form submitted successfully");
         } else {
             // Invalid token - reject submission
             log.error("校验错误"+validation);
 
-            return result.error("Verification failed: " + validation.getErrorCodes());
+            return Result.error("Verification failed: " + validation.getErrorCodes());
         }
 
     }
