@@ -33,3 +33,7 @@ _write_edit.js
 .dsh-acl-recovery/
 .dsh-recovery-tmp/
 __verify_shots/
+
+.qc/
+github-profile/
+docs/
