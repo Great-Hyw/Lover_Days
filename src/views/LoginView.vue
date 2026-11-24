@@ -12,7 +12,7 @@ const router = useRouter()
 const route = useRoute()
 const authStore = useAuthStore()
 const anniversaryStore = useAnniversaryStore()
-const token=ref(' ');
+const token=ref();
 
 const mode = ref('login')
 const loading = ref(false)
@@ -35,6 +35,7 @@ const errors = reactive({
 */
 const onSuccess=(t)=>{
   token.value=t;
+  
 }
 const onError=(error)=>{
   console.log(error);
@@ -117,22 +118,26 @@ function validate() {
 }
 
 async function onSubmit() {
-  if (loading.value) return
-  if (!validate()) return
+  if(token==null) showToast("进行人机验证"); return;
 
+  if (loading.value) return//按钮是否再次被按过
+  if (!validate()) return//是否有没填的信息
+  
   loading.value = true
   try {
     if (isLogin.value) {
       await authStore.login({
         userName: form.username.trim(),
-        password: form.password
+        password: form.password,
+        rtoken:token
       })
       showToast('欢迎回来～')
     } else {
       await authStore.register({
         userName: form.username.trim(),
         password: form.password,
-        nickName: form.nickname.trim()
+        nickName: form.nickname.trim(),
+        rtoken:token
       })
       showToast('注册成功，欢迎加入～')
     }
