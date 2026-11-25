@@ -1,9 +1,12 @@
 package com.wei.service;
 
 import com.wei.mapper.LoginMapper;
+import com.wei.pojo.TurnstileResponse;
 import com.wei.util.CullentUtil;
 import com.wei.util.JwtUtil;
 import com.wei.pojo.User;
+import com.wei.util.RoobitVerfyUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,10 +23,16 @@ public class LoginImpl implements LoginService {
     @Autowired
     private JwtUtil jwtUtil;
 
+    @Autowired
+    private RoobitVerfyUtil roobitVerfyUtil;
+
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
     @Override
     public User login(User user) {
-        boolean matches=false;
+
+
+
+        boolean matches;
         User user1=loginMapper.login(user);
         log.info("``````"+"此为登录界面");
         if(user1==null){//账号不为空
@@ -72,9 +81,12 @@ public class LoginImpl implements LoginService {
         Integer id= CullentUtil.get();
         log.info("当前用户"+id);
 
-        User user= loginMapper.GetUser(id);
+        return loginMapper.GetUser(id);
 
-        return user;
+    }
 
+    @Override
+    public TurnstileResponse roobitVerify(String rtoken, HttpServletRequest request) {
+      return roobitVerfyUtil.submitForm(rtoken,request);
     }
 }

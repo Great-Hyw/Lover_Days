@@ -7,12 +7,7 @@ const routes = [
     name: 'login',
     component: () => import('@/views/LoginView.vue'),
     meta: { title: '登录', public: true }
-  }, 
-  {
-    path:'/welcome',
-    component:()=>import('@/components/roobits.vue'),
-     meta: { title: '人机验证' }
-  },      
+  },  
   {
     path: '/',
     component: () => import('@/views/LayoutView.vue'),
@@ -83,14 +78,6 @@ router.afterEach((to) => {
 //   2. 已登录用户访问登录页 -> 直接进入首页。
 router.beforeEach((to) => {
   const token = getCookie('token')
-  const rtoken=getCookie('rtoken')//人机验证的标记，'ok'
-  if(to.path=='/welcome'){
-    return true
-  }
-  
-  if(rtoken!=='ok'){
-    return {path:'/welcome'}
-  }
   if (!to.meta.public && !token) {
     return { name: 'login', query: { redirect: to.fullPath } }
   }

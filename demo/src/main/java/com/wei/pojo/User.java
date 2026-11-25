@@ -21,6 +21,7 @@ public class User {
     private String nickName;
     private String avatar;
     private Integer id;
+    private String rtoken;
     private LocalDateTime creatTime;
     private LocalDateTime updateTime;
     private String token;
