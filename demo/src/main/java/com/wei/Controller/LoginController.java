@@ -1,8 +1,11 @@
 package com.wei.controller;
 
+import com.wei.pojo.TurnstileResponse;
 import com.wei.result.Result;
 import com.wei.service.LoginService;
 import com.wei.pojo.User;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,14 +21,16 @@ public class LoginController {
     private LoginService loginService;
 
     @RequestMapping("/login")
-    public Result login(@RequestBody User use) {
-        log.info("开始登录~"+use.toString());
-        if (use == null) {
-            return Result.error("字段缺失或者空的");
+    public Result login(@RequestBody User use, HttpServletResponse response, HttpServletRequest request) {
+
+        log.info("开始登录~{}", use.toString());
+
+        //先对人机验证进行验证
+        TurnstileResponse verify  =  loginService.roobitVerify(use.getRtoken(),request);
+        if(!verify.isSuccess()){
+            return Result.error("人机验证失败");
         }
-
         User user = loginService.login(use);
-
         if (user != null) {
             log.debug("结果" + user.toString());
             return Result.success(user);
