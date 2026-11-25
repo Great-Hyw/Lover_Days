@@ -15,7 +15,6 @@ demo/target/
 
 # 本地环境变量文件（含数据库口令、JWT 密钥）：只提交模板 example.env
 *.env
-*.env.*
 !demo/env/example.env
 
 # 日志与无关杂物
