@@ -12,7 +12,7 @@ const router = useRouter()
 const route = useRoute()
 const authStore = useAuthStore()
 const anniversaryStore = useAnniversaryStore()
-const token=ref();
+const token=ref(null);
 
 const mode = ref('login')
 const loading = ref(false)
@@ -118,7 +118,7 @@ function validate() {
 }
 
 async function onSubmit() {
-  if(token==null) showToast("进行人机验证"); return;
+  if(token.value===null) showToast("进行人机验证"); return;
 
   if (loading.value) return//按钮是否再次被按过
   if (!validate()) return//是否有没填的信息

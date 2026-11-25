@@ -1,15 +1,13 @@
 <script setup lang="ts">
 import { VueTurnstile } from 'vue-cloudflare-turnstile'
-import { useRouter} from 'vue-router'
-
+const site_key=import.meta.env.VITE_SITE_KEY;
 
 const emit=defineEmits(['succeess','error','expired','timeout'])
 
-const router =useRouter();
-
-   const handleSuccess = async (token: string) => {
+const handleSuccess = async (token: string) => {
         emit('succeess',token);
   }
+
 
 
   const handleError=(errors?:string)=>{
@@ -26,12 +24,15 @@ const router =useRouter();
     emit('timeout');
   }
 
+
 </script>
 
 <template>
   <VueTurnstile
-    site-key="0x4AAAAAAGDZF-Gcr5tEQO2n"
-    @success="handleSuccess",
+    :site-key="site_key"
+    theme="light"
+    @success="handleSuccess"
+    retryInterval="5000"
     @error="handleError"
     @expired="habdleExpired"
     @timeout="handleTimeout"

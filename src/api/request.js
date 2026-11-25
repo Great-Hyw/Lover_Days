@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { mockAdapter } from '@/mock/mockAdapter'
 import { getCookie, removeCookie } from '@/utils/cookie'
 import { showToast } from '@/utils/toast'
 
@@ -12,21 +11,9 @@ import { showToast } from '@/utils/toast'
  * 2. 其余接口在 VITE_USE_MOCK=true 时由本地 Mock 适配器接管，
  *    后端全部就绪后将其改为 false，所有请求即走真实后端。
  */
-const useMock = import.meta.env.VITE_USE_MOCK === 'true'
-// 真实网络适配器（浏览器环境为 XMLHttpRequest）
-const realAdapter = axios.getAdapter(['xhr', 'http', 'fetch'])
-
 const service = axios.create({
-  baseURL: 'https://cp.ywip.top:8443/api',
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   timeout: 10000,
-  adapter: (config) => {
-    const isAuthRequest = /^\/auth\//.test(config.url || '')
-    // 认证请求必须走真实后端；非 Mock 模式下所有请求都走真实后端
-    if (!useMock || isAuthRequest) {
-      return realAdapter(config)
-    }
-    return mockAdapter(config)
-  }
 })
 
 // 请求拦截器：统一携带 token（存于 Cookie，30 分钟有效）
