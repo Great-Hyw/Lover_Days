@@ -1,4 +1,4 @@
-package com.wei.interceptor;
+package com.wei.Interceptor;
 
 import com.wei.util.CullentUtil;
 import com.wei.util.JwtUtil;

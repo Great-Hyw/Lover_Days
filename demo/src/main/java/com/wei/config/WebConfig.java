@@ -1,6 +1,7 @@
 package com.wei.config;
 
-import com.wei.interceptor.LoginInterceptor;
+
+import com.wei.Interceptor.LoginInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
